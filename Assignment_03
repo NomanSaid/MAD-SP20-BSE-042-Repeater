@@ -1,0 +1,83 @@
+import { StyleSheet,Button,TextInput, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <View style={{flex : 1}}> 
+      <NavigationContainer>
+      <Stack.Navigator
+      
+      screenOptions={{
+        headerRight :(props) => {return(<Button title='Right'/>)},
+        headerStyle : {
+          backgroundColor : 'blue'
+        },
+        headerTintColor: "white",
+        headerTitleStyle : {
+          fontSize : 25,
+        }
+      }}
+      >
+
+      <Stack.Screen name="Login" component={Login}
+      />
+      <Stack.Screen name="Profile" component={Profile}/>
+
+      </Stack.Navigator>
+
+      </NavigationContainer>
+    </View>
+  );
+}
+
+const Profile = () => {
+  return(
+    <View style={{alignContent: 'center', alignItems: 'center',margin : 50}}> 
+      <Text style={{fontSize : 40, fontWeight: 'bold', margin : 30}}></Text>    
+    </View>
+  )
+}
+
+const Login = (props) => {
+  return(
+    <View style={{alignContent: 'center', alignItems: 'center',margin : 30}}> 
+    <Text style={{fontSize: 30,fontWeight:'bold',marginBottom:20 }}></Text>
+      <TextInput
+        style={styles.input}
+        placeholder='Enter User Name'
+      />
+      <TextInput
+        style={styles.input}
+        placeholder='Enter User Password'
+      />
+      <View style={{margin:34,}}>
+        <Button title='Login' onPress={()=>{props.navigation.navigate("Profile")}} color={'blue'}/>
+        <Text style={{textAlign: 'center',marginTop:10,marginBottom:10}}></Text>
+        <Button title='Signup' onPress={()=>{props.navigation.navigate("Home")}} color={'blue'}/>
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FF0000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize : 30,
+    fontWeight : 'bold'
+  
+  },
+  input: {
+    height: 40,
+    width : 400,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius : 20,
+  },
+});
